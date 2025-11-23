@@ -85,11 +85,11 @@ Install required libraries
    ```bash
     jupyter notebook "Mental_Health_Sentiment_Analysis_(RoBERTa).ipynb"
 
-🤝 Future Work
+##🤝 Future Work
 This project is open for further improvements. Future goals include:
 Expanding the Dataset: Incorporating more diverse sources to reduce bias.
 Model Exploration: Experimenting with BERT-Large or XLNet.
 Deployment: Creating a web API (using Flask/FastAPI) for real-time inference.
 
-📄 License
+##📄 License
 This project is open-source and available under the MIT License.
