@@ -1,177 +1,96 @@
-# Mental Health Sentiment Analysis using Deep Learning (RoBERTa) 💖
+# Mental Health Sentiment Analysis using Deep Learning (RoBERTa) 🧠💖
+
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-red)
+![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-yellow)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ## 🌟 Project Overview
 
-In our digital world, prioritizing mental well-being is critical. This project, stands as a testament to our commitment to fostering a more empathetic and supportive online environment.
+In our digital world, prioritizing mental well-being is critical. This project applies advanced **Natural Language Processing (NLP)** techniques to classify mental health-related text into **seven distinct sentiment categories**: *Anxiety, Bipolar, Depression, Normal, Personality Disorder, Stress, and Suicidal*. 
 
-This project applies advanced Natural Language Processing (NLP) techniques to classify mental health-related text into **seven distinct sentiment categories** — `Anxiety`, `Bipolar`, `Depression`, `Normal`, `Personality Disorder`, `Stress`, and `Suicidal` — using both traditional machine learning and fine-tuned transformer models (RoBERTa). It demonstrates how AI can assist in early detection of mental health issues from user-generated content.
-Our goal is to provide a tool that can help in early detection and understanding, paving the way for timely support and intervention, and reminding us that behind every screen, there's a human story.
+Using both traditional machine learning (Logistic Regression) and fine-tuned transformer models (**RoBERTa**), this project demonstrates how AI can assist in the early detection of mental health issues from user-generated content.
 
-<p align="center">
-  <img src="https://i.pinimg.com/736x/14/57/8e/14578edd117e0e6e99aebe86175953f9.jpg" alt="Mental Health Banner" width="360"/>
-</p>
-
-> Behind every message is a human story — and these tools can help make those voices heard.
-
----
+> **Note:** This is a student research project intended for educational purposes. It is not a substitute for professional medical advice or diagnosis.
 
 ## 🧠 Motivation
-
 In the digital era, individuals often express their deepest struggles through online platforms. Sentiment analysis offers a way to detect and interpret these emotional cues, providing:
-
-- 🆘 **Early intervention** for at-risk individuals  
-- 🌐 **Public mental health insights** to shape policies  
-- ❤️ **Stigma reduction** through empathetic AI  
-- 🧠 **Tailored support systems** via classification-driven responses  
-
----
+* 🆘 **Early intervention** for at-risk individuals.
+* 🌐 **Public mental health insights** to shape policies.
+* ❤️ **Stigma reduction** through empathetic AI.
+* 🧠 **Tailored support systems** via classification-driven responses.
 
 ## 🔍 Dataset
-
-- **Source**: [Kaggle - Sentiment Analysis for Mental Health](https://www.kaggle.com/datasets/suchintikasarkar/sentiment-analysis-for-mental-health)
-- **Size**: Over 50,000 labeled mental health text entries.
-- **Classes**: 7 multi-class categories: `Anxiety`, `Bipolar`, `Depression`, `Normal`, `Personality disorder`, `Stress`, `Suicidal`.
-- **Initial Data Split**:
-    - Full Training Set Size: 42,434 samples
-    - Raw Test Set Size: 10,609 samples
-
----
+* **Source:** Kaggle - Sentiment Analysis for Mental Health
+* **Size:** Over 50,000 labeled mental health text entries.
+* **Classes:** 7 multi-class categories (Anxiety, Bipolar, Depression, Normal, Personality disorder, Stress, Suicidal).
+* **Data Split:** * Training Set: 42,434 samples
+    * Test Set: 10,609 samples
 
 ## 🔧 Methodology
 
-### ✅ Data Preprocessing
+### 1. Data Preprocessing
+A robust preprocessing pipeline cleaned and normalized text data:
+* **Text Cleaning:** Expanded contractions, removed special tokens (URLs, hashtags), handled digits, and removed punctuation.
+* **Linguistic Processing:** Stopword removal and lemmatization (using spaCy/NLTK).
+* **Filtering:** Removed excessively short texts (<5 words).
 
-A robust preprocessing pipeline cleaned and normalized text data, including:
+### 2. Exploratory Data Analysis (EDA)
+Performed comprehensive analysis including Sentiment Distribution Charts (Bar/Pie) and N-gram Plots (Unigrams, Bigrams, Trigrams) to understand textual patterns.
 
-* **Text Cleaning**: Expanding contractions, replacing special tokens (URLs, mentions, hashtags), expanding acronyms, handling digits, reducing repeated characters, and removing punctuation.
-* **Linguistic Processing**: Removing stopwords and lemmatizing words (using spaCy/NLTK).
-* **Filtering**: Removing short texts (less than 5 words after cleaning).
-* **Label Distribution**: Analysis of sentiment class distribution (Depression: 33.77%, Suicidal: 23.20%, Normal: 20.78%, etc.).
-
-### 📊 Exploratory Data Analysis (EDA)
-
-Comprehensive EDA was performed to understand sentiment distribution and textual patterns. Visualizations generated include:
-
-* **Sentiment Distribution Charts**: Bar and Pie charts.
-* **Word Clouds**: Per sentiment class.
-* **N-gram Plots**: Unigrams, Bigrams, and Trigrams per sentiment.
-
-<!--<p align="center">
-  <img src="https://github.com/indranil143/Mental-Health-Sentiment-Analysis-using-Deep-Learning/blob/main/SS/Sentiment%20Distribution.png" alt="Sentiment Distribution" width="600"/>
-</p>
--->
-
-### 🧪 Models Implemented
-
-This project utilized both traditional machine learning and advanced deep learning models:
-
-1.  **Logistic Regression (Baseline Model)**
-    * **Vectorization**: TF-IDF with `max_features=5000` and `ngram_range=(1, 2)`.
-    * **Hyperparameter Tuning**: `GridSearchCV` with `f1_weighted` scoring across various solvers, penalties, and C values.
-
-2.  **RoBERTa (Transformer Fine-Tuned)**
-    * **Model**: Fine-tuned `roberta-base` for sequence classification.
-    * **Configuration**: Used `RobertaTokenizerFast`, custom `dropout rate: 0.2`, and `weight decay: 0.01`.
-    * **Training**: Employed `nn.CrossEntropyLoss` with balanced class weights, `AdamW` optimizer, and `linear warmup scheduler`. Trained for 7 epochs with validation monitoring and early stopping, achieving a **best validation accuracy of 0.7386**.
-
----
+### 3. Models Implemented
+* **Logistic Regression (Baseline):** Uses TF-IDF vectorization with `f1_weighted` scoring.
+* **RoBERTa (Fine-Tuned Transformer):** * Base model: `roberta-base`
+    * Optimizer: AdamW with linear warmup.
+    * Loss Function: CrossEntropyLoss with balanced class weights.
+    * Performance: Trained for 7 epochs with early stopping.
 
 ## 📈 Results
 
-| Model                  | Accuracy | F1 Score |
-|------------------------|----------|----------|
-| Logistic Regression    | 71.00%   | 0.71     |
-| RoBERTa (fine-tuned)   | 75.33%   | 0.75     |
+| Model | Accuracy | F1 Score |
+| :--- | :--- | :--- |
+| **Logistic Regression (Baseline)** | 71.00% | 0.71 |
+| **RoBERTa (Fine-Tuned)** | **75.33%** | **0.75** |
 
-<!--
-### Confusion Matrix plot for the RoBERTa model
+## ✨ Prediction Examples
 
-<p align="center">
-  <img src="https://github.com/indranil143/Mental-Health-Sentiment-Analysis-using-Deep-Learning/blob/main/SS/CM%20-%20RoBERTa.png" alt="RoBERTa Confusion Matrix" width="600"/>
-</p>
--->
----
+The model processes raw text and outputs the predicted sentiment along with probability distributions.
 
-## ✨ Prediction Result Example
-
-The model can lovingly process raw text and output the predicted sentiment along with the probability distribution across all defined sentiment classes, offering insights that can guide compassionate responses.
-
-**Example 1: Positive Sentiment**
-* **Original Text:** "I am feeling absolutely ecstatic and overjoyed today, everything is wonderful!"
-* **Cleaned Text:** "feel absolutely ecstatic overjoyed today everything wonderful"
-* **Predicted Sentiment:** Normal
-* **Class Probabilities:**
-    * Anxiety: 0.0111,
-    * Bipolar: 0.0693,
-    * Depression: 0.1111,
-    * **Normal: 0.7580**,
-    * Personality disorder: 0.0073,
-    * Stress: 0.0021,
-    * Suicidal: 0.0412
+**Example 1: Normal Sentiment**
+> *Input:* "I am feeling absolutely ecstatic and overjoyed today, everything is wonderful!"
+>
+> *Prediction:* **Normal** (Probability: 75.8%)
 
 **Example 2: Depression Sentiment**
-* **Original Text:** "The weight of this sadness is crushing me. I feel so empty and depressed."
-* **Cleaned Text:** "weight sadness crush feel empty depressed"
-* **Predicted Sentiment:** Depression
-* **Class Probabilities:**
-    * Anxiety: 0.0011,
-    *  Bipolar: 0.0012,
-    *  **Depression: 0.9742**,
-    *  Normal: 0.0023,
-    *  Personality disorder: 0.0015,
-    *  Stress: 0.0006,
-    *  Suicidal: 0.0191
-
----
+> *Input:* "The weight of this sadness is crushing me. I feel so empty and depressed."
+>
+> *Prediction:* **Depression** (Probability: 97.4%)
 
 ## 🚀 Installation & Running
 
-To get this project up and running, follow these simple steps:
+To replicate this project locally:
 
-### Clone the repository
-```bash
-git clone https://github.com/indranil143/Mental-Health-Sentiment-Analysis-using-Deep-Learning.git
-cd Mental-Health-Sentiment-Analysis-using-Deep-Learning
-```
-### Install required libraries
-```bash
-pip install -r requirements.txt
-```
-### Run the notebook
-```bash
-jupyter notebook Mental_Health_Sentiment_Analysis_(RoBERTa).ipynb
-```
----
+1. **Clone the repository**
+   ```bash
+   git clone [https://github.com/Sanjeeb58/Mental-Health-Sentiment-Analysis-Deep-Learning.git](https://github.com/Sanjeeb58/Mental-Health-Sentiment-Analysis-Deep-Learning.git)
+   cd Mental-Health-Sentiment-Analysis-Deep-Learning
 
-## 🤝 Future Work and Contributions
+   Install required libraries
+   
+2. **Install required texts**
+   ```bash
+   pip install -r requirements.txt
+  (Note: Ensure you have PyTorch installed with CUDA support if using GPU)
 
-This project is an open invitation to join us in making a positive impact. Contributions are warmly welcomed! If you're inspired to enhance this endeavor, consider:
+3. **Run the Notebook**
+   ```bash
+    jupyter notebook "Mental_Health_Sentiment_Analysis_(RoBERTa).ipynb"
 
-* **Expanding the Dataset:** Let's collaboratively grow the dataset with more diverse and larger collections, enriching the model's understanding of the human experience.
-* **Exploring Other Models:** Venture into new horizons by experimenting with other transformer models or deep learning architectures, constantly seeking better ways to connect and comprehend.
-* **Deploying the Model:** Imagine an API or a compassionate web application for real-time sentiment analysis, bringing immediate understanding and support to those who need it most.
-* **Bias Analysis:** With a gentle hand and keen eye, investigate and mitigate potential biases in the model's predictions, ensuring fairness and equity in our digital empathy.
+🤝 Future Work
+This project is open for further improvements. Future goals include:
+Expanding the Dataset: Incorporating more diverse sources to reduce bias.
+Model Exploration: Experimenting with BERT-Large or XLNet.
+Deployment: Creating a web API (using Flask/FastAPI) for real-time inference.
 
----
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](https://github.com/indranil143/Mental-Health-Sentiment-Analysis-using-Deep-Learning/blob/main/LICENSE).
-
----
-
-## 📧 Contact
-
-🤝 For any inquiries or collaborations, feel free to reach out to the project maintainer: 
-
-**indranil143**
-* GitHub: https://github.com/indranil143
-* Email: banerjeeindranil143@gmail.com
-
-If you or someone you know needs immediate help, please contact one of the following resources:
-- National Suicide Prevention Lifeline: 1-800-273-8255
-- Crisis Text Line: Text 'HOME' to 741741
-- National Alliance on Mental Illness (NAMI) HelpLine: Call 1-800-950-NAMI (6264) or text 'NAMI' to 62640. ([nami.org](https://www.nami.org/))
-- [More Resources](https://www.helpguide.org/find-help/mental-health/mental-health-helplines/)
-
-> Join us as we explore the data with sensitivity, build powerful models with purpose, and unveil the emotional heartbeat of mental health text. Together, we can make a difference. 🤝✨
+📄 License
+This project is open-source and available under the MIT License.
