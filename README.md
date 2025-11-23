@@ -72,7 +72,7 @@ To replicate this project locally:
 
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/Sanjeeb58/Mental-Health-Sentiment-Analysis-Deep-Learning.git](https://github.com/Sanjeeb58/Mental-Health-Sentiment-Analysis-Deep-Learning.git)
+   git clone https://github.com/Sanjeeb58/Mental-Health-Sentiment-Analysis-Deep-Learning.git
    cd Mental-Health-Sentiment-Analysis-Deep-Learning
 Install required libraries
    
