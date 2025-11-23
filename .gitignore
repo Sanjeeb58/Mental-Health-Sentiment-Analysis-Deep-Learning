@@ -1,0 +1,13 @@
+# Ignore the virtual environment folder
+.venv/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore Python cache
+__pycache__/
+
+# Ignore huge data folder (Optional: Keep this line if your data folder is >100MB)
+data/"*.safetensors" 
+"output_mental_health_sentiment_v3_reg/" 
+output_mental_health_sentiment_v3_reg/
